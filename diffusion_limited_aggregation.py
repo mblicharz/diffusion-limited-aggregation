@@ -2,13 +2,10 @@ from typing import Tuple, List
 
 
 class DiffusionLimitedAggregation:
-    def __init__(self, area: List[int, int] = None,
+    def __init__(self, area_size: List[int, int] = None,
                  seed: Tuple[int, int] = None):
-        self.__area = area
+        self.area_size = area_size
         if seed:
-            self.__seed = seed
+            self.seed = seed
         else:
-            self.__seed = [self.__area[0] / 2, self.__area[1] / 2]
-
-    def draw(self) -> List[List[bool]]:
-        pass
+            self.seed = [self.area_size[0] / 2, self.area_size[1] / 2]
