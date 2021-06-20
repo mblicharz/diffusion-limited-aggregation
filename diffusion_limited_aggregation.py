@@ -17,6 +17,9 @@ class DiffusionLimitedAggregation:
                 round(self.area_size[0] / 2),
                 round(self.area_size[1] / 2))
 
+    def show(self) -> None:
+        self.area.plot()
+
     def draw(self) -> None:
         self.area.set_point(self.seed)
 
