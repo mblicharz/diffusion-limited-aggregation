@@ -45,20 +45,23 @@ class DiffusionLimitedAggregation:
         if direction == 1 and point.x > 0:
             return Point(point.x - 1, point.y)
 
-        elif direction == 2 and point.x > 0 and point.y < self.area_size[1]:
+        elif direction == 2 and \
+                point.x > 0 and point.y < self.area_size[1] - 1:
             return Point(point.x - 1, point.y + 1)
 
-        elif direction == 3 and point.y < self.area_size[1]:
+        elif direction == 3 and point.y < self.area_size[1] - 1:
             return Point(point.x, point.y + 1)
 
         elif direction == 4 and \
-                point.x < self.area_size[0] and point.y < self.area_size[1]:
+                point.x < self.area_size[0] - 1 and \
+                point.y < self.area_size[1] - 1:
             return Point(point.x + 1, point.y + 1)
 
-        elif direction == 5 and point.x < self.area_size[0]:
+        elif direction == 5 and point.x < self.area_size[0] - 1:
             return Point(point.x + 1, point.y)
 
-        elif direction == 6 and point.x < self.area_size[0] and point.y > 0:
+        elif direction == 6 and \
+                point.x < self.area_size[0] - 1 and point.y > 0:
             return Point(point.x + 1, point.y - 1)
 
         elif direction == 7 and point.y > 0:

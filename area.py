@@ -11,6 +11,9 @@ class Point:
         self.x = x
         self.y = y
 
+    def __repr__(self):
+        return f'{self.x} {self.y}'
+
 
 class Area:
     def __init__(self, size: Tuple[int, int] = (0, 0)):
@@ -27,7 +30,7 @@ class Area:
         edge = random.randint(1, 4)
 
         if edge == 1:
-            return Point(0, random.randint(0, self.size[1]) - 1)
+            return Point(0, random.randint(0, self.size[1] - 1))
 
         elif edge == 2:
             return Point(random.randint(0, self.size[0] - 1), self.size[1] - 1)
