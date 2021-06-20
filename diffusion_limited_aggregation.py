@@ -17,8 +17,21 @@ class DiffusionLimitedAggregation:
                 round(self.area_size[0] / 2),
                 round(self.area_size[1] / 2))
 
-    def draw(self):
-        pass
+    def draw(self) -> None:
+        self.area.set_point(self.seed)
+
+        for _ in range(self.particles_num):
+            particle = self.area.get_random_edge_point()
+
+            while True:
+                new_point = self._next_point(particle)
+
+                if self.area.point_exists(new_point):
+                    self.area.set_point(particle)
+                    break
+
+                else:
+                    particle = new_point
 
     def _next_point(self, point: Point) -> Point:
         return self._brownian_step_move(point)
