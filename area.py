@@ -15,13 +15,13 @@ class Point:
 class Area:
     def __init__(self, size: Tuple[int, int] = (0, 0)):
         self.size = size
-        self.area = np.zeros((self.size[0], self.size[1]))
+        self.matrix = np.zeros((self.size[0], self.size[1]))
 
     def set_point(self, point: Point):
-        self.area[point.x][point.y] = 1
+        self.matrix[point.x][point.y] = 1
 
     def point_exists(self, point: Point) -> bool:
-        return bool(self.area[point.x][point.y])
+        return bool(self.matrix[point.x][point.y])
 
     def get_random_edge_point(self) -> Point:
         edge = random.randint(1, 4)
@@ -41,5 +41,5 @@ class Area:
     def plot(self) -> None:
         plt.ylim(0, self.size[0] - 1)
         plt.xlim(0, self.size[1] - 1)
-        plt.imshow(self.area)
+        plt.imshow(self.matrix)
         plt.show()

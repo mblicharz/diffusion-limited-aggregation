@@ -8,6 +8,7 @@ class DiffusionLimitedAggregation:
     def __init__(self, area_size: Tuple[int, int] = (0, 0),
                  seed: Point = None, particles_num: int = 0):
         self.area_size = area_size
+        self.area = Area(self.area_size)
         self.particles_num = particles_num
         if seed:
             self.seed = seed
