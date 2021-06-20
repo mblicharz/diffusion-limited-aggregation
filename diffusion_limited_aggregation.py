@@ -27,7 +27,7 @@ class DiffusionLimitedAggregation:
             particle = self.area.get_random_edge_point()
 
             while True:
-                new_point = self._next_point(particle)
+                new_point = self._random_adjacent_point(particle)
 
                 if self.area.point_exists(new_point):
                     self.area.set_point(particle)
@@ -36,7 +36,7 @@ class DiffusionLimitedAggregation:
                 else:
                     particle = new_point
 
-    def _next_point(self, point: Point) -> Point:
+    def _random_adjacent_point(self, point: Point) -> Point:
         return self._brownian_step_move(point)
 
     def _brownian_step_move(self, point: Point = None) -> Point:
