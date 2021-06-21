@@ -33,10 +33,10 @@ class DiffusionLimitedAggregation:
 
         for _ in range(self.particles_num):
             print(_)
-            particle = self.area.get_random_edge_point()
+            particle = self._random_edge_point()
 
             while True:
-                new_point = self.area.random_adjacent_point(particle)
+                new_point = self._random_adjacent_point(particle)
 
                 if self.area.point_exists(new_point):
                     self.area.set_point(particle)
@@ -44,3 +44,15 @@ class DiffusionLimitedAggregation:
 
                 else:
                     particle = new_point
+
+    def _random_adjacent_point(self, point: Point) -> Point:
+        if self.lattice:
+            return self.lattice.random_adjacent_point(point)
+
+        return self.area.random_adjacent_point(point)
+
+    def _random_edge_point(self) -> Point:
+        if self.lattice:
+            return self.lattice.random_boundary_point()
+
+        return self.area.get_random_edge_point()
