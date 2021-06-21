@@ -53,18 +53,18 @@ class SquareLattice:
                          )
 
         if boundary == 2:
-            return Point(random.randint(self.min_x + 1, self.min_x - 1),
-                         self.max_y - 1
+            return Point(random.randint(self.min_x + 1, self.max_x - 1),
+                         self.min_y + 1
                          )
 
         if boundary == 3:
             return Point(self.max_x - 1,
-                         random.randint(self.min_y + 1, self.max_y -1)
+                         random.randint(self.min_y + 1, self.max_y - 1)
                          )
 
         if boundary == 4:
-            return Point(random.randint(self.min_x + 1, self.min_x - 1),
-                         self.max_y + 1
+            return Point(random.randint(self.min_x + 1, self.max_x - 1),
+                         self.max_y - 1
                          )
 
     def random_adjacent_point(self, point: Point) -> Point:
