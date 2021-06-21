@@ -6,7 +6,7 @@ from area import Area, Point, SquareLattice
 class DiffusionLimitedAggregation:
     def __init__(self, size: Tuple[int, int] = (0, 0),
                  seed: Point = None, particles_num: int = 0,
-                 lattice_size: int = None, lattice_step: int = None,
+                 lattice_size: int = None, lattice_step: int = 10,
                  lattice_shape: str = 'square'):
         self.area = Area(size)
         self.particles_num = particles_num
