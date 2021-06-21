@@ -40,6 +40,10 @@ class DiffusionLimitedAggregation:
 
                 if self.area.point_exists(new_point):
                     self.area.set_point(particle)
+
+                    if self.lattice and self.lattice.is_boundary(particle):
+                        self.lattice.increase_size(self.lattice_step)
+
                     break
 
                 else:
