@@ -41,6 +41,40 @@ class Area:
         elif edge == 4:
             return Point(random.randint(0, self.size[0] - 1), 0)
 
+    def random_adjacent_point(self, point: Point = None) -> Point:
+        direction = random.randint(1, 8)
+
+        if direction == 1 and point.x > 0:
+            return Point(point.x - 1, point.y)
+
+        elif direction == 2 and \
+                point.x > 0 and point.y < self.size[1] - 1:
+            return Point(point.x - 1, point.y + 1)
+
+        elif direction == 3 and point.y < self.size[1] - 1:
+            return Point(point.x, point.y + 1)
+
+        elif direction == 4 and \
+                point.x < self.size[0] - 1 and \
+                point.y < self.size[1] - 1:
+            return Point(point.x + 1, point.y + 1)
+
+        elif direction == 5 and point.x < self.size[0] - 1:
+            return Point(point.x + 1, point.y)
+
+        elif direction == 6 and \
+                point.x < self.size[0] - 1 and point.y > 0:
+            return Point(point.x + 1, point.y - 1)
+
+        elif direction == 7 and point.y > 0:
+            return Point(point.x, point.y - 1)
+
+        elif direction == 8 and point.x > 0 and point.y > 0:
+            return Point(point.x - 1, point.y - 1)
+
+        else:
+            return point
+
     def plot(self) -> None:
         plt.ylim(0, self.size[0] - 1)
         plt.xlim(0, self.size[1] - 1)
