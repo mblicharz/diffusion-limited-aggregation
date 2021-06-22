@@ -127,14 +127,14 @@ class CircularLattice(Lattice):
         if self.center.x - self.radius < 0:
             self.radius += self.center.x - self.radius
 
-        if self.center.x + self.radius > self.max_size[0] - 1:
-            self.radius -= self.radius - self.max_size[0] - 1
+        if self.center.x + self.radius > self.max_size[0]:
+            self.radius -= self.max_size[0] - self.radius
 
         if self.center.y - self.radius < 0:
             self.radius += self.center.y - self.radius
 
-        if self.center.y + self.radius > self.max_size[1] - 1:
-            self.radius -= self.radius - self.max_size[1] - 1
+        if self.center.y + self.radius > self.max_size[1]:
+            self.radius -= self.max_size[1] - self.radius
 
     def random_boundary_point(self) -> Point:
         theta = random.random() * 2.0 * math.pi
@@ -144,7 +144,7 @@ class CircularLattice(Lattice):
         )
 
     def random_adjacent_point(self, point: Point) -> Point:
-        new_point = point
+        new_point = Point(point.x, point.y)
         direction = random.randint(1, 8)
 
         if direction == 1:
