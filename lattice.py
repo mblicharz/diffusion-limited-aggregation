@@ -1,3 +1,4 @@
+import math
 import random
 from typing import Tuple
 
@@ -107,3 +108,80 @@ class SquareLattice(Lattice):
 
         else:
             return point
+
+
+class CircularLattice(Lattice):
+    def __init__(self, center: Point, max_size: Tuple[int, int]):
+        super().__init__(center, max_size)
+
+        self.radius = 0
+
+    def is_boundary(self, point: Point) -> bool:
+        point_radius = self._point_radius(point)
+
+        return point_radius >= self.radius - 1
+
+    def increase_size(self, step: int = 10) -> None:
+        self.radius += step
+
+        if self.center.x - self.radius < 0:
+            self.radius += self.center.x - self.radius
+
+        if self.center.x + self.radius > self.max_size[0] - 1:
+            self.radius -= self.radius - self.max_size[0] - 1
+
+        if self.center.y - self.radius < 0:
+            self.radius += self.center.y - self.radius
+
+        if self.center.y + self.radius > self.max_size[1] - 1:
+            self.radius -= self.radius - self.max_size[1] - 1
+
+    def random_boundary_point(self) -> Point:
+        theta = random.random() * 2.0 * math.pi
+        return Point(
+            round(self.center.x + math.cos(theta) * (self.radius - 1)),
+            round(self.center.y + math.sin(theta) * (self.radius - 1))
+        )
+
+    def random_adjacent_point(self, point: Point) -> Point:
+        new_point = point
+        direction = random.randint(1, 8)
+
+        if direction == 1:
+            new_point.x -= 1
+
+        elif direction == 2:
+            new_point.x -= 1
+            new_point.y += 1
+
+        elif direction == 3:
+            new_point.y += 1
+
+        elif direction == 4:
+            new_point.x += 1
+            new_point.y += 1
+
+        elif direction == 5:
+            new_point.x += 1
+
+        elif direction == 6:
+            new_point.x += 1
+            new_point.y -= 1
+
+        elif direction == 7:
+            new_point.y -= 1
+
+        elif direction == 8:
+            new_point.x -= 1
+            new_point.y -= 1
+
+        new_point_radius = self._point_radius(new_point)
+        if new_point_radius < self.radius:
+            return new_point
+
+        return point
+
+    def _point_radius(self, point: Point) -> int:
+        return round(math.hypot(
+            self.center.x - point.x, self.center.y - point.y
+        ))
