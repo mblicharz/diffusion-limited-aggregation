@@ -3,6 +3,7 @@ import random
 from typing import Tuple
 
 from area import Point
+from enums import Edge, Direction
 
 
 class Lattice:
@@ -10,13 +11,13 @@ class Lattice:
         self.center = center
         self.max_size = max_size
 
-    def is_boundary(self, point: Point) -> bool:
+    def is_edge(self, point: Point) -> bool:
         raise NotImplemented
 
     def increase_size(self, step: int = 10) -> None:
         raise NotImplemented
 
-    def random_boundary_point(self) -> Point:
+    def random_edge_point(self) -> Point:
         raise NotImplemented
 
     def random_adjacent_point(self, point: Point) -> Point:
@@ -32,7 +33,7 @@ class SquareLattice(Lattice):
         self.max_x = center.x
         self.max_y = center.y
 
-    def is_boundary(self, point: Point) -> bool:
+    def is_edge(self, point: Point) -> bool:
         return point.x == self.min_x + 1 \
                or point.x == self.max_x - 1 \
                or point.y == self.min_y + 1 \
@@ -51,58 +52,58 @@ class SquareLattice(Lattice):
         if self.max_y != self.max_size[1] - 1:
             self.max_y = min(self.max_y + step, self.max_size[1] - 1)
 
-    def random_boundary_point(self) -> Point:
-        boundary = random.randint(1, 4)
+    def random_edge_point(self) -> Point:
+        edge = random.choice(list(Edge))
 
-        if boundary == 1:
+        if edge == Edge.NORTH:
             return Point(self.min_x + 1,
                          random.randint(self.min_y + 1, self.max_y - 1)
                          )
 
-        if boundary == 2:
+        if edge == Edge.EAST:
             return Point(random.randint(self.min_x + 1, self.max_x - 1),
                          self.min_y + 1
                          )
 
-        if boundary == 3:
+        if edge == Edge.SOUTH:
             return Point(self.max_x - 1,
                          random.randint(self.min_y + 1, self.max_y - 1)
                          )
 
-        if boundary == 4:
+        if edge == Edge.WEST:
             return Point(random.randint(self.min_x + 1, self.max_x - 1),
                          self.max_y - 1
                          )
 
     def random_adjacent_point(self, point: Point) -> Point:
-        direction = random.randint(1, 8)
+        direction = random.choice(list(Direction))
 
-        if direction == 1 and point.x > self.min_x + 1:
+        if direction == Direction.NORTH and point.x > self.min_x + 1:
             return Point(point.x - 1, point.y)
 
-        elif direction == 2 and \
+        elif direction == Direction.NORTH_EAST and \
                 point.x > self.min_x + 1 and point.y < self.max_y - 1:
             return Point(point.x - 1, point.y + 1)
 
-        elif direction == 3 and point.y < self.max_y - 1:
+        elif direction == Direction.EAST and point.y < self.max_y - 1:
             return Point(point.x, point.y + 1)
 
-        elif direction == 4 and \
+        elif direction == Direction.SOUTH_EAST and \
                 point.x < self.max_x - 1 and \
                 point.y < self.max_y - 1:
             return Point(point.x + 1, point.y + 1)
 
-        elif direction == 5 and point.x < self.max_x - 1:
+        elif direction == Direction.SOUTH and point.x < self.max_x - 1:
             return Point(point.x + 1, point.y)
 
-        elif direction == 6 and \
+        elif direction == Direction.SOUTH_WEST and \
                 point.x < self.max_x - 1 and point.y > self.min_y + 1:
             return Point(point.x + 1, point.y - 1)
 
-        elif direction == 7 and point.y > self.min_y + 1:
+        elif direction == Direction.WEST and point.y > self.min_y + 1:
             return Point(point.x, point.y - 1)
 
-        elif direction == 8 and \
+        elif direction == Direction.NORTH_WEST and \
                 point.x > self.min_x + 1 and point.y > self.min_y + 1:
             return Point(point.x - 1, point.y - 1)
 
@@ -116,7 +117,7 @@ class CircularLattice(Lattice):
 
         self.radius = 0
 
-    def is_boundary(self, point: Point) -> bool:
+    def is_edge(self, point: Point) -> bool:
         point_radius = self._point_radius(point)
 
         return point_radius >= self.radius - 1
@@ -136,7 +137,7 @@ class CircularLattice(Lattice):
         if self.center.y + self.radius > self.max_size[1]:
             self.radius -= self.max_size[1] - self.radius
 
-    def random_boundary_point(self) -> Point:
+    def random_edge_point(self) -> Point:
         theta = random.random() * 2.0 * math.pi
         return Point(
             round(self.center.x + math.cos(theta) * (self.radius - 1)),
@@ -145,33 +146,33 @@ class CircularLattice(Lattice):
 
     def random_adjacent_point(self, point: Point) -> Point:
         new_point = Point(point.x, point.y)
-        direction = random.randint(1, 8)
+        direction = random.choice(list(Direction))
 
-        if direction == 1:
+        if direction == Direction.NORTH:
             new_point.x -= 1
 
-        elif direction == 2:
+        elif direction == Direction.NORTH_EAST:
             new_point.x -= 1
             new_point.y += 1
 
-        elif direction == 3:
+        elif direction == Direction.EAST:
             new_point.y += 1
 
-        elif direction == 4:
+        elif direction == Direction.SOUTH_EAST:
             new_point.x += 1
             new_point.y += 1
 
-        elif direction == 5:
+        elif direction == Direction.SOUTH:
             new_point.x += 1
 
-        elif direction == 6:
+        elif direction == Direction.SOUTH_WEST:
             new_point.x += 1
             new_point.y -= 1
 
-        elif direction == 7:
+        elif direction == Direction.WEST:
             new_point.y -= 1
 
-        elif direction == 8:
+        elif direction == Direction.NORTH_WEST:
             new_point.x -= 1
             new_point.y -= 1
 
