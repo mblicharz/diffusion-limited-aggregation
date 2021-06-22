@@ -1,6 +1,7 @@
 from typing import Tuple
 
-from area import Area, Point, SquareLattice
+from area import Area, Point
+from lattice import SquareLattice
 
 
 class DiffusionLimitedAggregation:
