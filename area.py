@@ -28,7 +28,7 @@ class Area:
     def point_exists(self, point: Point) -> bool:
         return bool(self.matrix[point.x][point.y])
 
-    def get_random_edge_point(self) -> Point:
+    def random_edge_point(self) -> Point:
         edge = random.choice(list(Edge))
 
         if edge == Edge.NORTH:

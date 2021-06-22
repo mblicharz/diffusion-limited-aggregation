@@ -49,7 +49,7 @@ class DiffusionLimitedAggregation:
                 if self.area.point_exists(new_point):
                     self.area.set_point(particle)
 
-                    if self.lattice and self.lattice.is_boundary(particle):
+                    if self.lattice and self.lattice.is_edge(particle):
                         self.lattice.increase_size(self.lattice_step)
 
                     break
@@ -65,6 +65,6 @@ class DiffusionLimitedAggregation:
 
     def _random_edge_point(self) -> Point:
         if self.lattice:
-            return self.lattice.random_boundary_point()
+            return self.lattice.random_edge_point()
 
-        return self.area.get_random_edge_point()
+        return self.area.random_edge_point()
