@@ -1,6 +1,7 @@
 from typing import Tuple
 
-from area import Area, Point, SquareLattice
+from area import Area, Point
+from lattice import SquareLattice, CircularLattice
 
 
 class DiffusionLimitedAggregation:
@@ -23,6 +24,8 @@ class DiffusionLimitedAggregation:
             self.lattice_step = lattice_step
             if lattice_shape == 'square':
                 self.lattice = SquareLattice(self.seed, size)
+            if lattice_shape == 'circle':
+                self.lattice = CircularLattice(self.seed, size)
             self.lattice.increase_size(self.lattice_step)
 
         self.show_progress = show_progress
