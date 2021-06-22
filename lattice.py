@@ -3,6 +3,7 @@ import random
 from typing import Tuple
 
 from area import Point
+from enums import Edge, Direction
 
 
 class Lattice:
@@ -52,57 +53,57 @@ class SquareLattice(Lattice):
             self.max_y = min(self.max_y + step, self.max_size[1] - 1)
 
     def random_boundary_point(self) -> Point:
-        boundary = random.randint(1, 4)
+        boundary = random.choice(list(Edge))
 
-        if boundary == 1:
+        if boundary == Edge.NORTH:
             return Point(self.min_x + 1,
                          random.randint(self.min_y + 1, self.max_y - 1)
                          )
 
-        if boundary == 2:
+        if boundary == Edge.EAST:
             return Point(random.randint(self.min_x + 1, self.max_x - 1),
                          self.min_y + 1
                          )
 
-        if boundary == 3:
+        if boundary == Edge.SOUTH:
             return Point(self.max_x - 1,
                          random.randint(self.min_y + 1, self.max_y - 1)
                          )
 
-        if boundary == 4:
+        if boundary == Edge.WEST:
             return Point(random.randint(self.min_x + 1, self.max_x - 1),
                          self.max_y - 1
                          )
 
     def random_adjacent_point(self, point: Point) -> Point:
-        direction = random.randint(1, 8)
+        direction = random.choice(list(Direction))
 
-        if direction == 1 and point.x > self.min_x + 1:
+        if direction == Direction.NORTH and point.x > self.min_x + 1:
             return Point(point.x - 1, point.y)
 
-        elif direction == 2 and \
+        elif direction == Direction.NORTH_EAST and \
                 point.x > self.min_x + 1 and point.y < self.max_y - 1:
             return Point(point.x - 1, point.y + 1)
 
-        elif direction == 3 and point.y < self.max_y - 1:
+        elif direction == Direction.EAST and point.y < self.max_y - 1:
             return Point(point.x, point.y + 1)
 
-        elif direction == 4 and \
+        elif direction == Direction.SOUTH_EAST and \
                 point.x < self.max_x - 1 and \
                 point.y < self.max_y - 1:
             return Point(point.x + 1, point.y + 1)
 
-        elif direction == 5 and point.x < self.max_x - 1:
+        elif direction == Direction.SOUTH and point.x < self.max_x - 1:
             return Point(point.x + 1, point.y)
 
-        elif direction == 6 and \
+        elif direction == Direction.SOUTH_WEST and \
                 point.x < self.max_x - 1 and point.y > self.min_y + 1:
             return Point(point.x + 1, point.y - 1)
 
-        elif direction == 7 and point.y > self.min_y + 1:
+        elif direction == Direction.WEST and point.y > self.min_y + 1:
             return Point(point.x, point.y - 1)
 
-        elif direction == 8 and \
+        elif direction == Direction.NORTH_WEST and \
                 point.x > self.min_x + 1 and point.y > self.min_y + 1:
             return Point(point.x - 1, point.y - 1)
 
@@ -145,33 +146,33 @@ class CircularLattice(Lattice):
 
     def random_adjacent_point(self, point: Point) -> Point:
         new_point = Point(point.x, point.y)
-        direction = random.randint(1, 8)
+        direction = random.choice(list(Direction))
 
-        if direction == 1:
+        if direction == Direction.NORTH:
             new_point.x -= 1
 
-        elif direction == 2:
+        elif direction == Direction.NORTH_EAST:
             new_point.x -= 1
             new_point.y += 1
 
-        elif direction == 3:
+        elif direction == Direction.EAST:
             new_point.y += 1
 
-        elif direction == 4:
+        elif direction == Direction.SOUTH_EAST:
             new_point.x += 1
             new_point.y += 1
 
-        elif direction == 5:
+        elif direction == Direction.SOUTH:
             new_point.x += 1
 
-        elif direction == 6:
+        elif direction == Direction.SOUTH_WEST:
             new_point.x += 1
             new_point.y -= 1
 
-        elif direction == 7:
+        elif direction == Direction.WEST:
             new_point.y -= 1
 
-        elif direction == 8:
+        elif direction == Direction.NORTH_WEST:
             new_point.x -= 1
             new_point.y -= 1
 
