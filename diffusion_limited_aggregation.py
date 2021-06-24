@@ -29,13 +29,19 @@ class DiffusionLimitedAggregation:
                 self.lattice = CircularLattice(self.seed, size)
             self.lattice.increase_size(self.lattice_step)
 
+        self.progress_bar = tqdm.tqdm(
+            range(self.particles_num),
+            unit=' particles',
+            ncols=74,
+        )
+
     def show(self) -> None:
         self.area.plot()
 
     def draw(self) -> None:
         self.area.set_point(self.seed)
 
-        for _ in tqdm.tqdm(range(self.particles_num)):
+        for _ in self.progress_bar:
             particle = self._random_edge_point()
 
             while True:
