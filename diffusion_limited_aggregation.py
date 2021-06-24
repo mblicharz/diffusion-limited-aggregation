@@ -1,5 +1,6 @@
-from typing import Tuple
+import tqdm
 
+from typing import Tuple
 from area import Area, Point
 from lattice import SquareLattice, CircularLattice
 
@@ -36,10 +37,7 @@ class DiffusionLimitedAggregation:
     def draw(self) -> None:
         self.area.set_point(self.seed)
 
-        for i in range(self.particles_num):
-            if self.show_progress:
-                pass
-
+        for _ in tqdm.tqdm(range(self.particles_num)):
             particle = self._random_edge_point()
 
             while True:
