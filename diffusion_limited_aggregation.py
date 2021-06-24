@@ -1,5 +1,6 @@
-from typing import Tuple
+import tqdm
 
+from typing import Tuple
 from area import Area, Point
 from lattice import SquareLattice, CircularLattice
 
@@ -8,7 +9,7 @@ class DiffusionLimitedAggregation:
     def __init__(self, size: Tuple[int, int] = (0, 0),
                  seed: Point = None, particles_num: int = 0,
                  lattice_size: int = None, lattice_step: int = 10,
-                 lattice_shape: str = 'square', show_progress: bool = False):
+                 lattice_shape: str = 'square'):
         self.area = Area(size)
         self.particles_num = particles_num
         if seed:
@@ -28,7 +29,11 @@ class DiffusionLimitedAggregation:
                 self.lattice = CircularLattice(self.seed, size)
             self.lattice.increase_size(self.lattice_step)
 
-        self.show_progress = show_progress
+        self.progress_bar = tqdm.tqdm(
+            range(self.particles_num),
+            unit=' particles',
+            ncols=74,
+        )
 
     def show(self) -> None:
         self.area.plot()
@@ -36,11 +41,7 @@ class DiffusionLimitedAggregation:
     def draw(self) -> None:
         self.area.set_point(self.seed)
 
-        for i in range(self.particles_num):
-            if self.show_progress:
-                print(f'{self.particles_num} / {i} ||'
-                      f' {round(i / self.particles_num * 100)}%')
-
+        for _ in self.progress_bar:
             particle = self._random_edge_point()
 
             while True:
