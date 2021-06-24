@@ -38,8 +38,7 @@ class DiffusionLimitedAggregation:
 
         for i in range(self.particles_num):
             if self.show_progress:
-                print(f'{self.particles_num} / {i} ||'
-                      f' {round(i / self.particles_num * 100)}%')
+                pass
 
             particle = self._random_edge_point()
 
