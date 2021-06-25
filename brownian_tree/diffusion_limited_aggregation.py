@@ -2,8 +2,8 @@ from typing import Tuple
 
 import tqdm
 
-from brownian_tree.lattice.circular_lattice import CircularLattice
-from brownian_tree.lattice.square_lattice import SquareLattice
+from brownian_tree.lattice import CircularLattice
+from brownian_tree.lattice import SquareLattice
 from brownian_tree.tools.area import Area
 from brownian_tree.tools.point import Point
 
