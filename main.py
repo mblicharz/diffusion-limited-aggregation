@@ -1,22 +1,9 @@
-import time
-
-from brownian_tree.diffusion_limited_aggregation import DiffusionLimitedAggregation
+from brownian_tree import get_brownian_tree
 
 if __name__ == "__main__":
-    dla = DiffusionLimitedAggregation(
-        size=(250, 250),
-        particles_num=12000,
-        lattice_shape='circle',
-    )
-
-    start_time = time.perf_counter()
-
-    dla.draw()
-
-    end_time = time.perf_counter()
-
-    run_time = end_time - start_time
-
-    print(f"Executed in {run_time:.4f} secs.")
-
-    dla.show()
+    brownian_tree = get_brownian_tree(size=(250, 250),
+                                      particles_num=12000,
+                                      lattice_shape='circle'
+                                      )
+    brownian_tree.draw()
+    brownian_tree.show()
