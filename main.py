@@ -1,6 +1,6 @@
 import time
 
-from diffusion_limited_aggregation import DiffusionLimitedAggregation
+from brownian_tree.diffusion_limited_aggregation import DiffusionLimitedAggregation
 
 if __name__ == "__main__":
     dla = DiffusionLimitedAggregation(

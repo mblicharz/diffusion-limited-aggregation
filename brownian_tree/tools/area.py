@@ -3,18 +3,8 @@ from typing import Tuple
 import matplotlib.pyplot as plt
 import numpy as np
 
-from enums import Edge, Direction
-
-
-class Point:
-    def __init__(self, x: int = 0, y: int = 0):
-        if x < 0 or y < 0:
-            raise ValueError("Both x and y should be greater or equal 0.")
-        self.x = x
-        self.y = y
-
-    def __repr__(self):
-        return f'{self.x} {self.y}'
+from brownian_tree.tools.enums import Edge, Direction
+from brownian_tree.tools.point import Point
 
 
 class Area:
