@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 from brownian_tree.tools.enums import Edge, Direction
-from brownian_tree.tools import Point
+from brownian_tree.tools.point import Point
 
 
 class Area:
