@@ -11,7 +11,10 @@ def get_brownian_tree(size: Tuple[int, int] = (0, 0),
         -> DiffusionLimitedAggregation:
     brownian_tree = DiffusionLimitedAggregation(
         size=size,
+        seed=seed,
         particles_num=particles_num,
+        lattice_size=lattice_size,
+        lattice_step=lattice_step,
         lattice_shape=lattice_shape,
     )
 
