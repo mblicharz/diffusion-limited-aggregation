@@ -8,16 +8,13 @@ class Lattice:
         self.max_size = max_size
 
     def is_edge(self, point: Point) -> bool:
-        raise NotImplemented
+        raise NotImplementedError
 
     def increase_size(self, step: int = 10) -> None:
-        raise NotImplemented
+        raise NotImplementedError
 
     def random_edge_point(self) -> Point:
-        raise NotImplemented
+        raise NotImplementedError
 
     def random_adjacent_point(self, point: Point) -> Point:
-        raise NotImplemented
-
-
-
+        raise NotImplementedError
