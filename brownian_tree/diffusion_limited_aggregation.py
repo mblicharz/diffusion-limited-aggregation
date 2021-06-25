@@ -10,13 +10,13 @@ from brownian_tree.tools.point import Point
 
 class DiffusionLimitedAggregation:
     def __init__(self, size: Tuple[int, int] = (0, 0),
-                 seed: Point = None, particles_num: int = 0,
+                 seed: Tuple[int, int] = None, particles_num: int = 0,
                  lattice_size: int = None, lattice_step: int = 10,
                  lattice_shape: str = 'square'):
         self.area = Area(size)
         self.particles_num = particles_num
         if seed:
-            self.seed = seed
+            self.seed = Point(seed[0], seed[1])
         else:
             self.seed = Point(
                 round(size[0] / 2),
