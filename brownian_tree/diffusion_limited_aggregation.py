@@ -1,6 +1,6 @@
-import tqdm
-
 from typing import Tuple
+
+import tqdm
 
 from brownian_tree.lattice.circular_lattice import CircularLattice
 from brownian_tree.lattice.square_lattice import SquareLattice
@@ -27,6 +27,7 @@ class DiffusionLimitedAggregation:
         if lattice_size:
             self.lattice_step = lattice_step
             if lattice_shape == 'square':
+                print('square')
                 self.lattice = SquareLattice(self.seed, size)
             if lattice_shape == 'circle':
                 self.lattice = CircularLattice(self.seed, size)
@@ -58,8 +59,7 @@ class DiffusionLimitedAggregation:
 
                     break
 
-                else:
-                    particle = new_point
+                particle = new_point
 
     def _random_adjacent_point(self, point: Point) -> Point:
         if self.lattice:

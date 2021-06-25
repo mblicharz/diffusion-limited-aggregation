@@ -36,58 +36,65 @@ class SquareLattice(Lattice):
 
     def random_edge_point(self) -> Point:
         edge = random.choice(list(Edge))
+        point = None
 
         if edge == Edge.NORTH:
-            return Point(self.min_x + 1,
+            point = Point(self.min_x + 1,
                          random.randint(self.min_y + 1, self.max_y - 1)
                          )
 
         if edge == Edge.EAST:
-            return Point(random.randint(self.min_x + 1, self.max_x - 1),
+            point = Point(random.randint(self.min_x + 1, self.max_x - 1),
                          self.min_y + 1
                          )
 
         if edge == Edge.SOUTH:
-            return Point(self.max_x - 1,
+            point = Point(self.max_x - 1,
                          random.randint(self.min_y + 1, self.max_y - 1)
                          )
 
         if edge == Edge.WEST:
-            return Point(random.randint(self.min_x + 1, self.max_x - 1),
+            point = Point(random.randint(self.min_x + 1, self.max_x - 1),
                          self.max_y - 1
                          )
 
+        return point
+
     def random_adjacent_point(self, point: Point) -> Point:
         direction = random.choice(list(Direction))
+        new_point = Point(point.x, point.y)
 
         if direction == Direction.NORTH and point.x > self.min_x + 1:
-            return Point(point.x - 1, point.y)
+            new_point.x -= 1
 
-        elif direction == Direction.NORTH_EAST and \
+        if direction == Direction.NORTH_EAST and \
                 point.x > self.min_x + 1 and point.y < self.max_y - 1:
-            return Point(point.x - 1, point.y + 1)
+            new_point.x -= 1
+            new_point.y += 1
 
-        elif direction == Direction.EAST and point.y < self.max_y - 1:
-            return Point(point.x, point.y + 1)
+        if direction == Direction.EAST and point.y < self.max_y - 1:
+            new_point.y += 1
 
-        elif direction == Direction.SOUTH_EAST and \
+        if direction == Direction.SOUTH_EAST and \
                 point.x < self.max_x - 1 and \
                 point.y < self.max_y - 1:
-            return Point(point.x + 1, point.y + 1)
+            new_point.x += 1
+            new_point.y += 1
 
-        elif direction == Direction.SOUTH and point.x < self.max_x - 1:
-            return Point(point.x + 1, point.y)
+        if direction == Direction.SOUTH and point.x < self.max_x - 1:
+            new_point.x += 1
 
-        elif direction == Direction.SOUTH_WEST and \
+        if direction == Direction.SOUTH_WEST and \
                 point.x < self.max_x - 1 and point.y > self.min_y + 1:
-            return Point(point.x + 1, point.y - 1)
+            new_point.x += 1
+            new_point.y -= 1
 
-        elif direction == Direction.WEST and point.y > self.min_y + 1:
-            return Point(point.x, point.y - 1)
+        if direction == Direction.WEST and point.y > self.min_y + 1:
+            new_point.y -= 1
 
-        elif direction == Direction.NORTH_WEST and \
+        if direction == Direction.NORTH_WEST and \
                 point.x > self.min_x + 1 and point.y > self.min_y + 1:
-            return Point(point.x - 1, point.y - 1)
+            new_point.x -= 1
+            new_point.y -= 1
 
-        else:
-            return point
+        return new_point

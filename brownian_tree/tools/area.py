@@ -20,52 +20,59 @@ class Area:
 
     def random_edge_point(self) -> Point:
         edge = random.choice(list(Edge))
+        point = None
 
         if edge == Edge.NORTH:
-            return Point(0, random.randint(0, self.size[1] - 1))
+            point = Point(0, random.randint(0, self.size[1] - 1))
 
-        elif edge == Edge.EAST:
-            return Point(random.randint(0, self.size[0] - 1), self.size[1] - 1)
+        if edge == Edge.EAST:
+            point = Point(random.randint(0, self.size[0] - 1), self.size[1] - 1)
 
-        elif edge == Edge.SOUTH:
-            return Point(self.size[0] - 1, random.randint(0, self.size[1] - 1))
+        if edge == Edge.SOUTH:
+            point = Point(self.size[0] - 1, random.randint(0, self.size[1] - 1))
 
-        elif edge == Edge.WEST:
-            return Point(random.randint(0, self.size[0] - 1), 0)
+        if edge == Edge.WEST:
+            point = Point(random.randint(0, self.size[0] - 1), 0)
 
-    def random_adjacent_point(self, point: Point = None) -> Point:
+        return point
+
+    def random_adjacent_point(self, point: Point) -> Point:
         direction = random.choice(list(Direction))
+        new_point = Point(point.x, point.y)
 
         if direction == Direction.NORTH and point.x > 0:
-            return Point(point.x - 1, point.y)
+            new_point.x -= 1
 
-        elif direction == Direction.NORTH_EAST and \
+        if direction == Direction.NORTH_EAST and \
                 point.x > 0 and point.y < self.size[1] - 1:
-            return Point(point.x - 1, point.y + 1)
+            new_point.x -= 1
+            new_point.y += 1
 
-        elif direction == Direction.EAST and point.y < self.size[1] - 1:
-            return Point(point.x, point.y + 1)
+        if direction == Direction.EAST and point.y < self.size[1] - 1:
+            new_point.y += 1
 
-        elif direction == Direction.SOUTH_EAST and \
+        if direction == Direction.SOUTH_EAST and \
                 point.x < self.size[0] - 1 and \
                 point.y < self.size[1] - 1:
-            return Point(point.x + 1, point.y + 1)
+            new_point.x += 1
+            new_point.y += 1
 
-        elif direction == Direction.SOUTH and point.x < self.size[0] - 1:
-            return Point(point.x + 1, point.y)
+        if direction == Direction.SOUTH and point.x < self.size[0] - 1:
+            new_point.x += 1
 
-        elif direction == Direction.SOUTH_WEST and \
+        if direction == Direction.SOUTH_WEST and \
                 point.x < self.size[0] - 1 and point.y > 0:
-            return Point(point.x + 1, point.y - 1)
+            new_point.x += 1
+            new_point.y -= 1
 
-        elif direction == Direction.WEST and point.y > 0:
-            return Point(point.x, point.y - 1)
+        if direction == Direction.WEST and point.y > 0:
+            new_point.y -= 1
 
-        elif direction == Direction.NORTH_WEST and point.x > 0 and point.y > 0:
-            return Point(point.x - 1, point.y - 1)
+        if direction == Direction.NORTH_WEST and point.x > 0 and point.y > 0:
+            new_point.x -= 1
+            new_point.y -= 1
 
-        else:
-            return point
+        return new_point
 
     def plot(self) -> None:
         plt.ylim(0, self.size[0] - 1)
