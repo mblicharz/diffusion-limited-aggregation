@@ -4,7 +4,7 @@ from typing import Tuple
 
 from brownian_tree.lattice.lattice import Lattice
 from brownian_tree.tools.enums import Direction
-from brownian_tree.tools.point import Point
+from brownian_tree.tools import Point
 
 
 class CircularLattice(Lattice):
