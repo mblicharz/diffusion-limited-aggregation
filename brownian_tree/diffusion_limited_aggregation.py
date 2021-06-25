@@ -1,8 +1,11 @@
 import tqdm
 
 from typing import Tuple
-from area import Area, Point
-from lattice import SquareLattice, CircularLattice
+
+from brownian_tree.lattice.circular_lattice import CircularLattice
+from brownian_tree.lattice.square_lattice import SquareLattice
+from brownian_tree.tools.area import Area
+from brownian_tree.tools.point import Point
 
 
 class DiffusionLimitedAggregation:
