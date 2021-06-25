@@ -9,7 +9,7 @@ from brownian_tree.tools.point import Point
 
 
 class DiffusionLimitedAggregation:
-    def __init__(self, size: Tuple[int, int] = (0, 0),
+    def __init__(self, size: Tuple[int, int],
                  seed: Tuple[int, int] = None, particles_num: int = 0,
                  lattice_size: int = None, lattice_step: int = 10,
                  lattice_shape: str = 'square'):

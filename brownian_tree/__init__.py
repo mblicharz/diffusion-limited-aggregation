@@ -4,7 +4,7 @@ from brownian_tree.diffusion_limited_aggregation import \
     DiffusionLimitedAggregation
 
 
-def get_brownian_tree(size: Tuple[int, int] = (0, 0),
+def get_brownian_tree(size: Tuple[int, int],
                       seed: Tuple[int, int] = None, particles_num: int = 0,
                       lattice_size: int = None, lattice_step: int = 10,
                       lattice_shape: str = 'square') \
