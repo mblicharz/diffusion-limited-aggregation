@@ -27,7 +27,6 @@ class DiffusionLimitedAggregation:
         if lattice_size:
             self.lattice_step = lattice_step
             if lattice_shape == 'square':
-                print('square')
                 self.lattice = SquareLattice(self.seed, size)
             if lattice_shape == 'circle':
                 self.lattice = CircularLattice(self.seed, size)

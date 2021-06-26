@@ -28,11 +28,11 @@ class SquareLattice(Lattice):
         if self.min_y != 0:
             self.min_y = max(self.min_y - step, 0)
 
-        if self.max_x != self.max_size[0] - 1:
-            self.max_x = min(self.max_x + step, self.max_size[0] - 1)
+        if self.max_x != self.max_size.max_x - 1:
+            self.max_x = min(self.max_x + step, self.max_size.max_x - 1)
 
-        if self.max_y != self.max_size[1] - 1:
-            self.max_y = min(self.max_y + step, self.max_size[1] - 1)
+        if self.max_y != self.max_size.max_y - 1:
+            self.max_y = min(self.max_y + step, self.max_size.max_y - 1)
 
     def random_edge_point(self) -> Point:
         edge = random.choice(list(Edge))
@@ -40,23 +40,23 @@ class SquareLattice(Lattice):
 
         if edge == Edge.NORTH:
             point = Point(self.min_x + 1,
-                         random.randint(self.min_y + 1, self.max_y - 1)
-                         )
+                          random.randint(self.min_y + 1, self.max_y - 1)
+                          )
 
         if edge == Edge.EAST:
             point = Point(random.randint(self.min_x + 1, self.max_x - 1),
-                         self.min_y + 1
-                         )
+                          self.min_y + 1
+                          )
 
         if edge == Edge.SOUTH:
             point = Point(self.max_x - 1,
-                         random.randint(self.min_y + 1, self.max_y - 1)
-                         )
+                          random.randint(self.min_y + 1, self.max_y - 1)
+                          )
 
         if edge == Edge.WEST:
             point = Point(random.randint(self.min_x + 1, self.max_x - 1),
-                         self.max_y - 1
-                         )
+                          self.max_y - 1
+                          )
 
         return point
 

@@ -24,14 +24,14 @@ class CircularLattice(Lattice):
         if self.center.x - self.radius < 0:
             self.radius += self.center.x - self.radius
 
-        if self.center.x + self.radius > self.max_size[0]:
-            self.radius -= self.max_size[0] - self.radius
+        if self.center.x + self.radius > self.max_size.max_x:
+            self.radius -= self.max_size.max_x - self.radius
 
         if self.center.y - self.radius < 0:
             self.radius += self.center.y - self.radius
 
-        if self.center.y + self.radius > self.max_size[1]:
-            self.radius -= self.max_size[1] - self.radius
+        if self.center.y + self.radius > self.max_size.max_y:
+            self.radius -= self.max_size.max_y - self.radius
 
     def random_edge_point(self) -> Point:
         theta = random.random() * 2.0 * math.pi

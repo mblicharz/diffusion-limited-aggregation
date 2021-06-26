@@ -1,11 +1,13 @@
 from typing import Tuple
+
+from brownian_tree.tools import Size
 from brownian_tree.tools.point import Point
 
 
 class Lattice:
     def __init__(self, center: Point, max_size: Tuple[int, int]):
         self.center = center
-        self.max_size = max_size
+        self.max_size = Size(max_size[0], max_size[1])
 
     def is_edge(self, point: Point) -> bool:
         raise NotImplementedError
