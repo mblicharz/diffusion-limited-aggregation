@@ -44,7 +44,7 @@ class DiffusionLimitedAggregation:
     def draw(self) -> None:
         self.area.set_point(self.seed)
 
-        for _ in self.progress_bar:
+        for _ in range(self.particles_num):
             particle = self._random_edge_point()
 
             while True:
@@ -52,6 +52,7 @@ class DiffusionLimitedAggregation:
 
                 if self.area.point_exists(new_point):
                     self.area.set_point(particle)
+                    self.progress_bar.update(1)
 
                     if self.lattice and self.lattice.is_edge(particle):
                         self.lattice.increase_size(self.lattice_step)
@@ -59,6 +60,8 @@ class DiffusionLimitedAggregation:
                     break
 
                 particle = new_point
+
+        self.progress_bar.close()
 
     def _random_adjacent_point(self, point: Point) -> Point:
         if self.lattice:
