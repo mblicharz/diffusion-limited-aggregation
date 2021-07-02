@@ -8,7 +8,7 @@ from brownian_tree.tools.area import Area
 from brownian_tree.tools.point import Point
 
 
-class DiffusionLimitedAggregation:
+class BrownianTree:
     def __init__(self, size: Tuple[int, int],
                  seed: Tuple[int, int] = None, particles_num: int = 0,
                  lattice_size: int = None, lattice_step: int = 10,
