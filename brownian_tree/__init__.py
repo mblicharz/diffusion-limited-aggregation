@@ -1,7 +1,6 @@
 from typing import Tuple
 
-from brownian_tree.brownian_tree import \
-    BrownianTree
+from .brownian_tree import BrownianTree
 
 
 def get_brownian_tree(size: Tuple[int, int],
